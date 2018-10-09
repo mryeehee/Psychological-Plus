@@ -1,0 +1,82 @@
+page {
+    background: #f6f6f6;
+    position: relative;
+    min-height: 100%;
+    height: auto;
+}
+
+.main {
+    margin: 13px;
+    margin-bottom: 20px;
+    padding: 15px;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 3px 5px 0 rgba(0,0,0,.2);
+    background: #fff;
+}
+
+.header {
+    padding: 12px 0 8px;
+}
+
+.title {
+    color: #333;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    padding-bottom: 13px;
+    margin: 0 auto;
+}
+
+.detail-pic-wrap {
+    position: relative;
+    padding-bottom: 67%;
+    margin-bottom: 10px;
+}
+
+.detail-pic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    line-height: 28px;
+    color: #666;
+    padding-top: 6px;
+}
+
+.edit-icon {
+    width: 10px;
+    height: 12px;
+    margin-right: 4px;
+}
+
+.share-btn,.start-btn {
+    padding: 0;
+    display: block;
+    margin: 0 5px;
+}
+
+.share-btn {
+    background: #FCF9E6;
+}
+
+.share-icon {
+    width: 13px;
+    height: 14px;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.evaluation-list-wrap {
+    margin: 0;
+}
+
+.category-name {
+    font-size: 16px;
+    font-weight: bold;
+}

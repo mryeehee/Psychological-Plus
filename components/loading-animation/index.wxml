@@ -1,0 +1,6 @@
+<template name="loading-animation">
+    <view class="loading-animation-wrap">
+        <view animation="{{data.animationDot1}}" class="loading-animation yxl-toast__first-loading-icon"></view>
+        <view animation="{{data.animationDot2}}" class="loading-animation"></view>
+    </view>
+</template>

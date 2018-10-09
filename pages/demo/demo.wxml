@@ -1,0 +1,6 @@
+<view style="overflow: visible">
+    <view style="position: relative;width:80px;height: 100px;perspective:900px;">
+        <view animation="{{backAnimate}}" class="test-card back-face">B</view>
+        <view animation="{{frontAnimate}}" class="test-card front-face">A</view>
+    </view>
+</view>

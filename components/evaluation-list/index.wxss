@@ -1,0 +1,88 @@
+.evaluation-list-wrap {
+    background: #fff;
+    margin: 0 5px;
+}
+
+.evaluation-list--header {
+    padding: 20px 15px 4px;
+    background: #fff;
+    margin-bottom: -1px;
+    position: relative;
+}
+
+.btn-size {
+    min-width: 48px;
+}
+
+.evaluation-list__item-wrap {
+    padding: 0 15px;
+}
+
+.evaluation-list__item {
+    padding: 15px 0;
+    border-top: 1px #f6f6f6 solid;
+}
+
+.evaluation-list__item-image-wrap {
+    width: 120rpx;
+    height: 120rpx;
+    margin-right: 10px;
+    position: relative;
+}
+
+.evaluation-list__item-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 4px;
+}
+
+.evaluation-list__item-content {
+    margin-right: 20px;
+}
+
+.evaluation-list__item-title {
+    font-size: 16px;
+    color: #333;
+    line-height: 20px;
+    margin-bottom: 2px;
+}
+
+.evaluation-list__item-summary {
+    font-size: 12px;
+    max-height: 32px;
+}
+
+.evaluation-list__item-btn {
+    height: 27px;
+    background: #ffdd2b;
+    text-align: center;
+    display: inline-block;
+    border-radius: 4px;
+    line-height: 27px;
+    font-weight: bold;
+}
+
+.evaluation-list__item-num {
+    margin-top: 4px;
+    display: block;
+    text-align: center;
+}
+
+.evaluation-list__item-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: -webkit-linear-gradient(bottom,rgba(0,0,0,0) 71%,rgba(0,0,0,.2) 100%);
+    border-radius: 4px;
+}
+
+.evaluation-list__item .list-pro-tag {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    margin: 0;
+    border-radius: 0 3px 3px 0;
+}

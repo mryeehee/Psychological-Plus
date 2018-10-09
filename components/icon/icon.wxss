@@ -1,0 +1,10 @@
+.yxl-icon {
+    vertical-align: middle;
+    position: relative;
+}
+
+.icon-share {
+    width: 22px;
+    height: 25px;
+    margin-right: 6px;
+}

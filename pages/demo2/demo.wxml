@@ -1,0 +1,2 @@
+<import src="/components/test-question/index.wxml"></import>
+<template is="test-question" data="{{source:source,animateData1:animateData1,animateData2:animateData2,animateData3:animateData3,animateData4:animateData4,pageDataIndex:pageDataIndex,activeIndex:activeIndex,isSending:isSending,indexTexts:indexTexts}}"></template>

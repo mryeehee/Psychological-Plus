@@ -1,0 +1,88 @@
+<import src="../../components/toast/toast.wxml"></import>
+<import src="../../components/modal/modal.wxml"></import>
+<import src="../../components/loading-animation/index.wxml"></import>
+<view>
+    <view class="page-head">
+        <view class="page-title">我的测试</view>
+    </view>
+    <view class="tab-bar clearfix">
+        <view class="tab-bar__item">
+            <text bindtap="switchTab" class="tab-bar__item-text {{type==='1'?'tab-bar__item-text--active':''}}" data-key="1">专业测评</text>
+        </view>
+        <view class="tab-bar__item">
+            <text bindtap="switchTab" class="tab-bar__item-text {{type==='2'?'tab-bar__item-text--active':''}}" data-key="2">趣味测试</text>
+        </view>
+    </view>
+    <view class="substitute-head"></view>
+    <view class="substitute-tab">
+        <view class="laoding-icon-wrap">
+            <template is="loading-animation" data="{{data:loadingAnimationConfig}}"></template>
+        </view>
+    </view>
+    <view class="product-list">
+        <view class="product-list__item" style="{{loading?'display:none;':''}}" wx:for="{{list}}" wx:key="{{item.scalePoolId}}">
+            <view class="product-list__item-head product-fun-list__item-head flex flex--middle" wx:if="{{type==='2'}}">
+                <view class="flex-item">
+                    <navigator url="../evaluation/detail?id={{item.scaleId}}">
+                        <view class="flex">
+                            <image class="product-pic" src="{{item.listPicture}}"></image>
+                            <view class="product-list__item-head-text flex-item flex flex-vertical">
+                                <text class="d-b product-title text-multi-overflow {{smallScreen?'fzi12':''}}">{{item.name}}</text>
+                                <text class="d-b product-spec text-overflow">{{item.shortDesc}}</text>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+                <view class="text-right">
+                    <navigator url="/pages/answer/answer-list?id={{item.scaleId}}&resultId={{item.resultId}}">
+                        <text class="btn-size action-btn c-btn c-btn--border action-btn--border {{smallScreen?'fzi12':''}}">查看</text>
+                    </navigator>
+                    <view class="text-center btn-size">
+                        <text class="color-weaken fz10 evaluation-list__item-num">{{item.testerTotal}}人测过</text>
+                    </view>
+                </view>
+            </view>
+            <block wx:else>
+                <view bindtap="jumpAPP" class="product-list__item-head flex flex--side" data-id="{{item.scalePoolId}}">
+                    <image class="product-pic" src="{{item.pic}}"></image>
+                    <view class="product-list__item-head-text flex-item flex flex-vertical">
+                        <text class="d-b product-title text-multi-overflow {{smallScreen?'fzi12':''}}">{{item.name}}</text>
+                        <text class="d-b product-spec text-overflow">{{item.shortDescribe}}</text>
+                    </view>
+                    <view class="product-price">
+                        <text class="price--highlight">{{item.discountPrice}}</text>
+                        <text class="price--del" wx:if="{{item.originalPrice!==item.discountPrice}}">{{item.originalPrice}}</text>
+                    </view>
+                </view>
+                <view class="flex flex--end product-list__item-footer">
+                    <view class="flex-item">
+                        <view>{{item.state?'完成':'购买'}}时间：{{item.state?item.completeTime:item.buyTime}}</view>
+                        <view class="flex-item flex flex--middle">
+                            <view class="text-overflow">
+                                <text class="color-weaken">订单编号：</text>
+                                <text>{{item.orderNo}}</text>
+                            </view>
+                            <text bindtap="copyOrderCode" class="copy-btn" data-code="{{item.orderNo}}">复制</text>
+                        </view>
+                    </view>
+                    <view class="action-btn-wrap">
+                        <text bindtap="jumpCeAPP" class="action-btn c-btn" data-url="{{item.computedUrl}}" wx:if="{{!item.state}}">去测</text>
+                        <text bindtap="jumpCeAPP" class="action-btn c-btn c-btn--border action-btn--border {{smallScreen?'fzi12':''}}" data-url="{{item.computedReportUrl}}" wx:else>查看</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="empty-box text-center" wx:if="{{!loading&&!list.length&&!hasErr}}">
+        <view class="empty-block flex-vertical flex-vertical--middle">
+            <image class="empty-img" src="../../asset/images/img_empty_{{type==='1'?'pro':'free'}}.png"></image>
+            <text class="d-b strong-title">暂无测{{type==='1'?'评':'试'}}</text>
+            <text class="d-b color-weaken">您测过的测{{type==='1'?'评':'试'}}会显示在这里</text>
+        </view>
+    </view>
+    <view bindtap="switchTab" class="d-b c-btn c-btn-lg go-more" data-key="{{type}}" wx:if="{{!loading&&!list.length&&hasErr}}">重新加载</view>
+    <template is="toast" data="{{toastData:toastLoadingConfig}}"></template>
+    <template is="modal" data="{{modalData:modalConfig}}"></template>
+    <template is="modal" data="{{modalData:modalConfig100}}"></template>
+    <template is="toast" data="{{toastData:toastConfig}}"></template>
+</view>

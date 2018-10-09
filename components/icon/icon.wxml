@@ -1,0 +1,3 @@
+<template name="icon">
+    <image class="d-ib yxl-icon {{className}}" src="../../asset/images/{{name}}.png"></image>
+</template>

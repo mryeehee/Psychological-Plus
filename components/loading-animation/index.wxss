@@ -1,0 +1,16 @@
+.loading-animation-wrap {
+    margin: 14px auto;
+    width: 30px;
+    height: 30px;
+    position: relative;
+}
+
+.loading-animation {
+    border-radius: 50%;
+    background: rgba(255,221,43,0.4);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

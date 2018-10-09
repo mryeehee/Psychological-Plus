@@ -1,0 +1,95 @@
+page::before {
+    display: none;
+}
+
+.page-head {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 11px 0;
+}
+
+.page-search-wrap {
+    background: #f6f6f6;
+    border-radius: 42px;
+    margin: 0 10px;
+}
+
+.search-input {
+    height: 27px;
+}
+
+.search-icon {
+    margin: 0 10px 0 12px;
+}
+
+.search-close-icon {
+    width: 17px;
+    height: 17px;
+    margin: 0 12px;
+}
+
+.search-recommend {
+    padding: 10px;
+}
+
+.search-tag {
+    float: left;
+    background: #fff;
+    border-radius: 4px;
+    padding: 6px 12px;
+    line-height: 1.4;
+    border: 1px #ddd solid;
+    margin: 5px;
+}
+
+.c-btn {
+    width: 50px;
+    line-height: 25px;
+    text-align: center;
+    margin-right: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #FFDD2B;
+}
+
+.search-cancel-btn {
+    color: #333;
+    background: #fff;
+    border-color: #ddd;
+}
+
+.search-result {
+    font-size: 14px;
+    color: #333;
+    padding: 0;
+    box-sizing: border-box;
+    position: absolute;
+    top: 54px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.search-result-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-bottom: 1px solid #ddd;
+    line-height: 42px;
+    padding: 0 10px;
+}
+
+.search-result-item--empty {
+    display: none;
+}
+
+.search-result-item--list-empty {
+    display: none;
+    margin: 12px 0 4px;
+    background: #fff;
+    text-align: center;
+}
+
+.search-result-item--tips {
+    display: none;
+}

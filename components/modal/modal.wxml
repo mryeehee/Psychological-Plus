@@ -1,0 +1,20 @@
+<template name="modal">
+    <view bindtap="{{modalData.maskClose?'yxlModalHandler'+modalData.bind+modalData.buttons.length:''}}" class="yxl-modal-mask {{modalData.animateMaskClass}}" wx:if="{{modalData.mask}}"></view>
+    <view class="yxl-modal-wrap">
+        <view class="yxl-modal {{modalData.className}} {{modalData.animateModalClass}}" style="{{modalData.width?'width:'+modalData.width:''}}">
+            <view bindtap="yxlModalHandler{{modalData.bind}}{{modalData.buttons.length}}" class="yxl-modal__close-btn" wx:if="{{modalData.closeBtn}}">
+                <image class="yxl-modal__close-img" src="../../asset/images/icon_close.png"></image>
+            </view>
+            <view wx:if="{{modalData.icon}}">
+                <image class="yxl-model-icon" src="../../asset/images/{{modalData.icon}}.png"></image>
+            </view>
+            <view class="yxl-modal-title" wx:if="{{modalData.title}}">{{modalData.title}}</view>
+            <view class="yxl-modal-content {{modalData.title?'':'yxl-modal-content--only'}}">{{modalData.content}}</view>
+            <view class="flex yxl-modal-footer">
+                <view bindtap="yxlModalHandler{{modalData.bind}}{{index}}" class="flex-item yxl-modal-button" data-index="{{index}}" wx:for="{{modalData.buttons}}" wx:key="{{index}}">
+                    <text>{{item.text}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

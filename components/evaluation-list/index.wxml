@@ -1,0 +1,26 @@
+<template name="evaluation-list">
+    <view class="evaluation-list">
+        <view bindtap="intelligenceJump" class="evaluation-list__item-wrap" data-id="{{item.scalePoolId}}" data-open-type="{{openType||'redirect'}}" data-url="../evaluation/detail?id={{item.id}}" wx:for="{{source}}" wx:key="{{item.id || item.scalePoolId}}">
+            <view class="flex flex--middle evaluation-list__item">
+                <view class="evaluation-list__item-image-wrap">
+                    <image class="evaluation-list__item-image" mode="aspectFill" src="{{item.introPicture}}"></image>
+                    <block wx:if="{{item.scalePoolId}}">
+                        <view class="evaluation-list__item-mask"></view>
+                        <view class="list-pro-tag"></view>
+                        <view class="list-pro-price">{{'￥'+item.discountPrice}}</view>
+                    </block>
+                </view>
+                <view class="flex-item evaluation-list__item-content flex flex-vertical flex--stretch flex--side">
+                    <view class="evaluation-list__item-title text-overflow">{{item.name}}</view>
+                    <view class="evaluation-list__item-summary color-weaken text-multi-overflow">{{item.shortDescribe}}</view>
+                </view>
+                <view class="text-right">
+                    <text class="evaluation-list__item-btn btn-size">GO</text>
+                    <view class="text-center btn-size">
+                        <text class="color-weaken fz10 evaluation-list__item-num">{{item.count}}人测过</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

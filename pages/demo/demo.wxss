@@ -1,0 +1,18 @@
+.test-card {
+    background: #e2e2e2;
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform-style: preserve-3d;
+}
+
+.front-face {
+    backface-visibility: hidden;
+}
+
+.back-face {
+    background: green;
+}

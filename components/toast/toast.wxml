@@ -1,0 +1,12 @@
+<template name="toast">
+    <view class="yxl-toast-mask" wx:if="{{toastData.mask}}"></view>
+    <view class="yxl-toast-wrap">
+        <view class="yxl-toast {{toastData.animateClass}}">
+            <view wx:if="{{toastData.loading}}">
+                <template is="loading-animation" data="{{data:toastData.loadingAnimation}}"></template>
+            </view>
+            <text>{{toastData.text}}</text>
+        </view>
+    </view>
+</template>
+<import src="../../components/loading-animation/index.wxml"></import>

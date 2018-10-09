@@ -1,0 +1,25 @@
+<template name="test-question">
+    <view class="slider-container" wx:if="{{!!source.length}}">
+        <view animation="{{animateData1}}" class="slider-view slider-view-1" data-index="{{pageDataIndex[0]}}" id="{{activeIndex===pageDataIndex[0]?'active-question':''}}">
+            <view class="slider-view-body">
+                <template is="question" data="{{ indexTexts:indexTexts,isSending:isSending,data:source[ pageDataIndex[0] ] }}"></template>
+            </view>
+        </view>
+        <view animation="{{animateData2}}" class="slider-view slider-view-2" data-index="{{pageDataIndex[1]}}" id="{{activeIndex===pageDataIndex[1]?'active-question':''}}">
+            <view class="slider-view-body">
+                <template is="question" data="{{ indexTexts:indexTexts,isSending:isSending,data:source[ pageDataIndex[1] ] }}"></template>
+            </view>
+        </view>
+        <view animation="{{animateData3}}" class="slider-view slider-view-3" data-index="{{pageDataIndex[2]}}" id="{{activeIndex===pageDataIndex[2]?'active-question':''}}">
+            <view class="slider-view-body">
+                <template is="question" data="{{ indexTexts:indexTexts,isSending:isSending,data:source[ pageDataIndex[2] ] }}"></template>
+            </view>
+        </view>
+        <view animation="{{animateData4}}" class="slider-view slider-view-4" data-index="{{pageDataIndex[3]}}" id="{{activeIndex===pageDataIndex[3]?'active-question':''}}">
+            <view class="slider-view-body">
+                <template is="question" data="{{ indexTexts:indexTexts,isSending:isSending,data:source[ pageDataIndex[3] ] }}"></template>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="./question.wxml"></import>

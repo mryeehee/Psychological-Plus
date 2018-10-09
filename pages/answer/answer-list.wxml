@@ -1,0 +1,103 @@
+<import src="../../components/modal/modal.wxml"></import>
+<import src="/components/test-question/index.wxml"></import>
+<import src="../../components/toast/toast.wxml"></import>
+<import src="../../components/evaluation-list/index.wxml"></import>
+<template is="test-question" data="{{source:source,animateData1:animateData1,animateData2:animateData2,animateData3:animateData3,animateData4:animateData4,pageDataIndex:pageDataIndex,activeIndex:activeIndex,isSending:isSending,indexTexts:indexTexts}}" wx:if="{{!isReportReady}}"></template>
+<view animation="{{counterAnimation}}" class="counter" wx:if="{{!isReportReady&&isQuestionReady&&scaleId}}">
+    <text class="counter-num">{{activeIndex+1||'--'}}</text>
+    <text class="counter-total">{{source.length||'--'}}</text>
+</view>
+<view class="report-page" style="{{isAdvance?'height:auto;':''}}" wx:if="{{isQuestionReady}}">
+    <view animation="{{item==2?null:reportAnimation}}" bindtap="maskHandler" class="{{item==2?'report-box-wrap--modal flex-vertical flex-vertical--center flex-vertical--middle':'report-box-wrap--doc'}}" id="{{item==2?'report-box-wrap':''}}" style="{{item==2?'top:'+(isShowModal?0:'-9999')+'px':''}}" wx:for="{{[1,2]}}" wx:key="{{item}}">
+        <view class="report-box {{item==2?smallScreen?'report-box--modal report-box--modal-small':'report-box--modal':''}}">
+            <view bindtap="{{item==2?'saveToAlbum':''}}" class="report-box__inner" style="{{item==2?'padding-bottom:'+qrcodeBoxWrapHeight+7+'px;max-height:'+cardMaxHeight+'px':''}}">
+                <view class="report-result__img-wrap">
+                    <image class="report-result__img" mode="aspectFill" src="{{result.picture||introPicture}}"></image>
+                    <view class="flex flex--middle flex--center report-title" wx:if="{{!result.picture}}">
+                        <text class="report-title-inner {{smallTitle?'small-title':''}}">{{title}}</text>
+                    </view>
+                </view>
+                <view class="report-box__content {{item==2?'report-box__content--modal':''}} {{smallScreen?item==2?'report-box__content--modal-small':'report-box__content-small':''}}">
+                    <view class="{{item==2?'report-result__head':''}}">
+                        <view class="flex flex--middle user-info" style="{{userInfo.nickName?'':'visibility:hidden'}}">
+                            <image class="user-pic" mode="aspectFill" src="{{userInfo.avatarUrl}}"></image>
+                            <text>{{userInfo.nickName}}</text>
+                        </view>
+                        <view class="report-result__name {{item==2?'report-result__name--modal':''}}">测试结果：{{result.title}}</view>
+                    </view>
+                    <view id="report-desc-wrap--modal" wx:if="{{item==2}}">
+                        <view class="report-desc report-desc--modal">
+                            <text>{{result.content}}</text>
+                        </view>
+                        <scroll-view scrollY class="report-desc report-desc--modal report-desc-scroll--modal" style="max-height:{{descMaxHeight}}px;">
+                            <text>{{result.content}}</text>
+                        </scroll-view>
+                    </view>
+                    <view class="report-desc" wx:else>
+                        <text>{{result.content}}</text>
+                    </view>
+                </view>
+                <view class="qrcode-box-wrap" id="qrcode-box-wrap" wx:if="{{item==2}}">
+                    <view class="qrcode-mask"></view>
+                    <view class="qrcode-box-wrap__inner">
+                        <view class="qrcode-box-wrap__bg-box">
+                            <image class="qrcode-box-wrap__bg" src="../../asset/images/qrcode-bd.png"></image>
+                        </view>
+                        <view class="flex qrcode-box {{smallScreen?'qrcode-box--small':''}}">
+                            <view class="qrcode-box__img">
+                                <image class="qrcode" mode="aspectFill" src="{{result.qrcodePic}}" wx:if="{{result.qrcodePic}}"></image>
+                            </view>
+                            <view class="flex-item" style="padding-left:10px;overflow:visible;">
+                                <view class="qrcode-box__title {{oneLine?'qrcode-box__title--single':''}}" id="qrcode-box__title">
+                                    <text id="qrcode-box__title-text">{{title}}</text>
+                                </view>
+                                <view class="qrcode-box__guide {{smallScreen?'fzi12':''}}">长按识别二维码快来测测吧</view>
+                            </view>
+                        </view>
+                        <view class="text-center fz10 color-weaken copyright">
+							壹心理©提供内容和技术支持
+						</view>
+                    </view>
+                </view>
+                <view class="flex flex--middle share-bar {{result.isShowResultPic?'isShowResultPic':''}}" wx:else>
+                    <view bindtap="showModal" class="flex-item flex flex--middle flex--center" wx:if="{{result.isShowResultPic}}">
+                        <image class="icon-wxf" src="../../asset/images/icon_wxf.png"></image>
+                        <text>保存结果图</text>
+                    </view>
+                    <button class="share-btn text-btn flex-item flex flex--middle flex--center" openType="share">
+                        <image class="icon-wx" src="../../asset/images/icon_wechat.png"></image>
+                        <text>分享给好友</text>
+                    </button>
+                </view>
+            </view>
+            <block wx:if="{{item==2}}">
+                <image bindtap="hideModal" class="modal-close-icon" src="../../asset/images/icon_close.png"></image>
+                <view bindtap="saveToAlbum" class="download-guide-btn text-center {{smallScreen?'fzi14':''}}">点击保存结果图</view>
+            </block>
+        </view>
+        <view class="download-guide-btn download-guide-btn-placeholder text-center {{smallScreen?'fzi12':''}}" wx:if="{{item==2}}">点</view>
+    </view>
+    <view animation="{{recommendAnimation}}" class="evaluation-list-wrap">
+        <view class="flex flex--middle evaluation-list--header">
+            <text class="category-name">大家都在测</text>
+            <text class="flex-item"></text>
+        </view>
+        <template is="evaluation-list" data="{{source:lists}}"></template>
+        <view class="text-center load-more-text">{{recommendPage>=maxPage?'别拉了，到底了':isLoading?'加载中...':''}}</view>
+    </view>
+</view>
+<view class="download-task-info flex flex--middle flex--center" wx:if="{{isShowProgress}}">
+    <view class="progress-box">
+        <view>
+            <text>正在下载... </text>
+            <text>{{progressVal}}%</text>
+        </view>
+        <view class="progress-bar" style="width:{{progressVal}}%"></view>
+    </view>
+</view>
+<canvas canvasId="share" class="share-canvas" style="width:{{shareSize.width}}px;height:{{shareSize.height}}px"></canvas>
+<canvas canvasId="result-canvas" class="result-canvas" style="width:{{canvas.width}}px;height:{{canvas.height}}px"></canvas>
+<view id="test-chart-row">{{queryRowText}}</view>
+<template is="modal" data="{{modalData:modalConfigApp}}"></template>
+<template is="toast" data="{{toastData:toastLoadingConfig}}"></template>
+<template is="toast" data="{{toastData:toastConfig}}"></template>

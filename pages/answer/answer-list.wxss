@@ -1,0 +1,49 @@
+@import "../../components/test-question/index.wxss";
+
+@import "../../components/test-question/question.wxss";
+
+@import "../../__wuBaseWxss__/7.wxss";
+
+.counter {
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    overflow: hidden;
+    width: 6em;
+    margin-left: -3em;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #666;
+}
+
+.counter::before {
+    position: absolute;
+    width: 32px;
+    border-top: 1px solid #979797;
+    content: '';
+    left: 50%;
+    transform: rotate(-60deg);
+    margin-left: -15px;
+    top: 22px;
+}
+
+.counter-num,.counter-total {
+    width: 48px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+.counter-total {
+    text-align: left;
+    left: 6px;
+    top: 10px;
+}
+
+.counter-num {
+    font-size: 20px;
+    color: #333;
+    text-align: right;
+    left: -6px;
+    top: -8px;
+}

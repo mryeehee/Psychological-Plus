@@ -1,0 +1,3 @@
+<import src="../../components/modal/modal.wxml"></import>
+<web-view src="{{web_url}}"></web-view>
+<template is="modal" data="{{modalData:modalConfig}}"></template>

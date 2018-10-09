@@ -1,0 +1,39 @@
+<import src="../../components/toast/toast.wxml"></import>
+<import src="../../components/evaluation-list/index.wxml"></import>
+<button bindtap="restartPage" class="c-btn restart-btn" loading="{{isLoading}}" wx:if="{{isInitFail}}">重新加载</button>
+<block wx:if="{{isInit}}">
+    <view class="main">
+        <view class="header">
+            <view class="title {{smallTitle?'small-title':''}}">{{name}}</view>
+            <view class="count flex flex--middle flex--center">
+                <image class="edit-icon" src="../../asset/images/icon_pen.png"></image>
+                <text class="fz12 color-weaken">{{count}}人测过</text>
+            </view>
+        </view>
+        <view class="content">
+            <view class="detail-pic-wrap">
+                <image class="detail-pic" src="{{introPicture}}" wx:if="{{introPicture}}"></image>
+            </view>
+            <view class="fz14">
+                <text>{{shortDescribe}}</text>
+            </view>
+        </view>
+        <view class="flex" style="margin: 25px -5px 8px;">
+            <navigator class="c-btn start-btn flex-item" openType="redirect" url="/pages/answer/answer-list?id={{id}}">开始测试</navigator>
+            <button class="c-btn share-btn c-btn--border flex-item flex flex--middle flex--center" openType="share">
+                <image class="share-icon" src="../../asset/images/icon_share.png"></image>
+                <text>分享给好友</text>
+            </button>
+        </view>
+    </view>
+    <view class="evaluation-list-wrap" wx:if="{{lists.length}}">
+        <view class="flex flex--middle evaluation-list--header">
+            <text class="category-name">大家都在测</text>
+            <text class="flex-item"></text>
+        </view>
+        <template is="evaluation-list" data="{{source:lists}}"></template>
+    </view>
+</block>
+<canvas canvasId="share" class="share-canvas" style="width:{{shareSize.width}}px;height:{{shareSize.height}}px"></canvas>
+<template is="toast" data="{{toastData:toastLoadingConfig}}"></template>
+<template is="toast" data="{{toastData:toastConfig}}"></template>

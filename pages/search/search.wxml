@@ -1,0 +1,52 @@
+<import src="../../components/modal/modal.wxml"></import>
+<import src="../../components/toast/toast.wxml"></import>
+<import src="../../components/evaluation-list/index.wxml"></import>
+<view class="page-head flex">
+    <view class="page-search-wrap flex-item flex flex--middle">
+        <image class="search-icon" src="../../asset/images/icon_search.png"></image>
+        <input bindconfirm="confirmHandler" bindinput="inputHandler" class="flex-item search-input" focus="{{!_keyword}}" placeholder="{{'搜索你感兴趣的测试'}}" placeholderClass="color-weaken" type="text" value="{{_keyword}}"></input>
+        <image bindtap="clearKeyword" class="search-close-icon" src="../../asset/images/btn_close.png"></image>
+    </view>
+    <navigator class="c-btn search-cancel-btn" openType="reLaunch" style="{{keyword?'display:none':''}}" url="/pages/index/index">取消</navigator>
+    <view bindtap="changeRenderType2" class="c-btn" style="{{keyword?'':'display:none'}}">搜索</view>
+</view>
+<scroll-view scrollY class="search-result" style="{{keyword&&renderType==1?'':'display:none'}}">
+    <view class="search-result-item" wx:for="{{list}}" wx:key="{{item.id || item.scalePoolId}}">
+        <view bindtap="jumpAPP" class="flex flex--middle" data-id="{{item.scalePoolId}}" data-name="{{item.name}}" wx:if="{{!!item.scalePoolId}}">
+            <text>{{item.name}}</text>
+            <text class="list-pro-tag"></text>
+        </view>
+        <navigator bindtap="sendSearchLog" data-name="{{item.name}}" url="../evaluation/detail?id={{item.id}}" wx:else>{{item.name}}</navigator>
+    </view>
+    <view class="search-result-item search-result-item--empty" style="{{isEmpty?'display:block':''}}">
+        <text>未找到相关匹配，请修改关键字</text>
+    </view>
+</scroll-view>
+<scroll-view scrollY class="search-result" style="{{keyword&&renderType==2&&!isEmpty?'':'display:none'}}">
+    <view class="search-result-item search-result-item--tips color-weaken" style="border:none;{{!isEmpty?'display:block':''}}">
+        <text>为您找到以下跟 “<text class="color-normal">{{keyword}}</text>” 有关的内容</text>
+    </view>
+    <view class="evaluation-list-wrap">
+        <template is="evaluation-list" data="{{source:list,openType:'navigate'}}"></template>
+    </view>
+</scroll-view>
+<view style="{{recommendList.length&&(!keyword||isEmpty&&renderType==2)?'':'display:none'}}">
+    <view class="search-result-item search-result-item--list-empty color-weaken" style="{{keyword?'display:block':''}}">
+        <text>抱歉{{emoji}}  没有找到 <text class="color-normal">{{keyword}}</text> 相关内容</text>
+    </view>
+    <view class="search-recommend">
+        <view class="fz14 color-weaken" style="margin:2px 0 10px 5px;">推荐搜索</view>
+        <view class="clearfix">
+            <view class="search-tag" wx:for="{{recommendTag}}" wx:key="*this">
+                <text bindtap="openSearch" data-key="{{item}}">{{item}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="evaluation-list-wrap">
+        <view class="color-weaken" style="background: #fff;padding: 10px 0 2px 16px;margin-bottom: -1px;position: relative;">猜你想测</view>
+        <template is="evaluation-list" data="{{source:recommendList,openType:'navigate'}}"></template>
+    </view>
+</view>
+<template is="modal" data="{{modalData:modalConfigApp}}"></template>
+<template is="toast" data="{{toastData:toastLoadingConfig}}"></template>
+<template is="toast" data="{{toastData:toastConfig}}"></template>

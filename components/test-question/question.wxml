@@ -1,0 +1,23 @@
+<template name="question">
+    <view class="question-item">
+        <scroll-view scrollY class="question-body-wrap" style="{{data.index!==1||data.isLastQuestion?'':'bottom:0'}}">
+            <view class="question-body {{data.needMask?'question-body--has-mask':''}}">
+                <view class="question-title">{{data.index}}、{{data.title}}</view>
+                <image class="question-img" mode="aspectFit" src="{{data.img.path}}" style="width:{{data.img.width}}px;height:{{data.img.height}}px" wx:if="{{data.img&&data.img.path}}"></image>
+                <view class="question-img" style="background:#eee;width:{{data.img.width}}rpx;height:{{data.img.height}}rpx" wx:if="{{data.img&&!data.img.path}}"></view>
+                <view class="question-option-wrap">
+                    <view bindtap="optionAction{{index}}" class="flex question-option" wx:for="{{data.options}}" wx:key="{{item.optionId}}">
+                        <text>{{indexTexts[index]}}</text>
+                        <text class="flex-item question-option_text">{{item.title}}</text>
+                        <text class="option-input {{data.answer===item.optionId?'option-input--selected':''}}"></text>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="question-mask {{data.index!==1||data.isLastQuestion?'':'question-mask--first'}}" wx:if="{{data.needMask}}"></view>
+        <view class="flex question-footer" wx:if="{{data}}">
+            <button bindtap="goPrevQuestion" class="flex-item c-btn question-footer_btn prev-btn" wx:if="{{data.index!==1}}">上一题</button>
+            <button bindtap="submit" class="flex-item c-btn question-footer_btn {{data.isAnswerCompletion?'':'c-btn--disabled'}}" loading="{{isSending}}" wx:if="{{data.isAnswerCompletion||data.isLastQuestion}}">提交</button>
+        </view>
+    </view>
+</template>

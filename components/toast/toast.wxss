@@ -1,0 +1,39 @@
+.yxl-toast-mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    z-index: 10000;
+}
+
+.yxl-toast-wrap {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10000;
+    overflow: visible;
+}
+
+.yxl-toast {
+    transform: translate(-50%,-50%);
+    display: inline-block;
+    background: rgba(0,0,0,.7);
+    color: #fff;
+    opacity: 0;
+    padding: 12px 14px;
+    line-height: 1.4;
+    border-radius: 4px;
+    min-width: 80px;
+    text-align: center;
+    transition: opacity .3s;
+    display: none;
+}
+
+.yxl-toast-enter {
+    opacity: 1;
+}
+
+.yxl-toast__first-loading-icon {
+    transform: scale(0);
+}

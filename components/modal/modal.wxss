@@ -1,0 +1,92 @@
+.yxl-modal-mask {
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    opacity: 0;
+    display: none;
+    transition: opacity .5s;
+}
+
+.yxl-modal-wrap {
+    position: fixed;
+    z-index: 10000;
+    top: 50%;
+    left: 50%;
+    overflow: visible;
+    transform: translate(-50%,-50%);
+}
+
+.yxl-modal {
+    background: #fff;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 18px 15px;
+    opacity: 0;
+    display: none;
+    transform: scale(.95);
+    transition: opacity .4s,-webkit-transform .4s;
+    transition: opacity .4s,transform .4s;
+    transition: opacity .4s,transform .4s,-webkit-transform .4s;
+}
+
+.yxl-modal-enter {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.yxl-modal-mask-enter {
+    opacity: 1;
+}
+
+.yxl-modal-title {
+    font-size: 19px;
+    color: #666;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+.yxl-modal-content {
+    font-size: 16px;
+    color: #999;
+    line-height: 1.8;
+    padding: 0 20px 14px 20px;
+}
+
+.yxl-modal-content--only {
+    color: #666;
+}
+
+.yxl-model-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.yxl-modal__close-btn {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    padding: 6px;
+}
+
+.yxl-modal__close-img {
+    width: 11px;
+    height: 11px;
+    display: block;
+}
+
+.yxl-modal-footer {
+    margin: 0 -5px;
+}
+
+.yxl-modal-button {
+    background: #ffdd2b;
+    text-align: center;
+    font-size: 16px;
+    line-height: 40px;
+    margin: 0 5px;
+    border-radius: 4px;
+}

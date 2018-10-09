@@ -1,0 +1,81 @@
+<template name="category">
+    <view class="hot-category__list">
+        <view class="hot-category__tag" wx:for="{{source}}" wx:key="this">
+            <text bindtap="changeCategory" class="hot-category__tag-inner {{activeCategoryName==item?'hot-category__tag-inner--active':''}}" data-name="{{item}}">{{item}}</text>
+        </view>
+        <view class="hot-category__tag">
+            <text bindtap="changeCategory" class="hot-category__tag-inner {{activeCategoryName=='付费精品'?'hot-category__tag-inner--active':''}}" data-id="{{0}}" data-name="付费精品">付费精品</text>
+        </view>
+    </view>
+</template>
+<template name="new-list">
+    <view animation="{{animation}}" class="new-test-box {{className}}">
+        <view class="flex flex--middle new-test-box__head">
+            <view class="new-test-box__header">
+                <text class="color-main">新鲜</text>
+                <text>测试</text>
+            </view>
+            <text class="flex-item"></text>
+            <view bindtap="refreshHot" class="new-test-box__more color-weaken fz14">换一批</view>
+        </view>
+        <view class="new-test-list">
+            <view wx:for="{{source}}" wx:key="{{item.id || item.scalePoolId}}">
+                <view bindtap="sendLogAndOpen" class="new-list__item-wrap" data-hfiveUrl="{{item.h5Url}}" data-id="{{item.scalePoolId}}" data-name="{{item.name}}" data-url="../evaluation/detail?id={{item.id}}">
+                    <view class="flex new-test-item">
+                        <image class="new-test-item__pic" mode="aspectFill" src="{{item.introPicture}}"></image>
+                        <view class="new-test-item__pic-wrap">
+                            <block wx:if="{{item.scalePoolId}}">
+                                <view class="list-pro-tag"></view>
+                                <view class="list-pro-price">{{'￥'+item.discountPrice}}</view>
+                            </block>
+                        </view>
+                        <view class="flex-item">
+                            <text class="new-test-item__title text-multi-overflow">{{item.name}}</text>
+                            <text class="color-weaken d-b" style="margin-top:2px">{{item.category}}</text>
+                        </view>
+                        <view class="new-test-item__btn">GO</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view animation="{{loadingAnimation}}" class="laoding-icon-wrap flex flex--middle" style="{{loadingVisible?'opacity:0;':'display:none;'}}"></view>
+    </view>
+</template>
+<import src="../../components/modal/modal.wxml"></import>
+<import src="../../components/evaluation-list/index.wxml"></import>
+<import src="../../components/toast/toast.wxml"></import>
+<import src="../../components/loading-animation/index.wxml"></import>
+<view class="page-head">
+    <view bindtap="jumpAPP" class="page-title">壹心理测试+</view>
+    <view class="page-search-wrap flex flex--middle">
+        <image class="search-icon" src="../../asset/images/icon_search.png"></image>
+        <view bindtap="jumpSearch" class="flex-item search-input color-weaken">搜索你感兴趣的测试</view>
+    </view>
+</view>
+<button bindtap="restartPage" class="c-btn restart-btn" loading="{{isLoading}}" wx:if="{{isInitFail}}">重新加载</button>
+<view style="overflow: visible" wx:if="{{isInit}}">
+    <view id="card-wrap">
+        <template is="new-list" data="{{source:frontLatest,className:'front-face',animation:frontAnimate,loadingIconAnimation:loadingAnimationConfig2,loadingAnimation:frontLoadingAnimation,loadingVisible:frontLoadingVisible}}"></template>
+    </view>
+    <block wx:if="{{appVersion>=200}}">
+        <view class="hot-category__title">热门分类</view>
+        <view class="hot-category" id="hot-category" style="opacity:1;{{fixCategory?'opacity:0':''}}">
+            <template is="category" data="{{source:categories,activeCategoryName:activeCategoryName}}"></template>
+        </view>
+        <view class="hot-category" style="position:fixed;{{fixCategory?'opacity:1':'z-index:-1'}}">
+            <template is="category" data="{{source:categories,activeCategoryName:activeCategoryName}}"></template>
+        </view>
+    </block>
+    <view class="evaluation-list-wrap">
+        <view class="flex flex--middle evaluation-list--header">
+            <text class="category-name">{{activeCategoryName}}测试</text>
+            <text class="flex-item"></text>
+            <text class="color-weaken fz12">共{{activeCategoryCount}}个测试</text>
+        </view>
+        <template is="evaluation-list" data="{{source:lists,openType:'navigate'}}"></template>
+    </view>
+    <view class="text-center load-more-text">{{currentPage>=maxPage?'别拉了，到底了':isLoading?'加载中...':''}}</view>
+</view>
+<template is="modal" data="{{modalData:modalConfigApp}}"></template>
+<template is="toast" data="{{toastData:toastLoadingConfig}}"></template>
+<template is="toast" data="{{toastData:toastConfig}}"></template>
